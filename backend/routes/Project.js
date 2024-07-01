@@ -19,4 +19,4 @@ ProjectRouter.patch("/statuscancel/:id", updateProjectStatusToCancelled);
 ProjectRouter.get("/projectinfo", getProjectInfo);
 ProjectRouter.get("/dashboardchart", getDashboardChart);
 
-module.exports = ProjectRouter;
+exports.ProjectRouter = ProjectRouter;
