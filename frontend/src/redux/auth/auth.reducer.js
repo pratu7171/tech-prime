@@ -1,10 +1,11 @@
+
 import { LOGIN_ERROR, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT } from "./auth.types";
 
 // Retrieve token from localStorage
 let token = localStorage.getItem("token");
 
 // Check if token is retrieved correctly
-console.log("Token from localStorage:", token);
+console.log("Token from localStorage at initialization:", token);
 
 // Initial state with token from localStorage
 const initialState = {
@@ -26,6 +27,8 @@ export const authReducer = (state = initialState, { type, payload }) => {
                 error: false,
             };
         case LOGIN_SUCCESS:
+            console.log("Setting token to localStorage:", payload.token);
+            localStorage.setItem("token", payload.token); // Ensure token is set in localStorage
             return {
                 ...state,
                 isAuth: true,
@@ -43,6 +46,7 @@ export const authReducer = (state = initialState, { type, payload }) => {
                 message: payload.message,
             };
         case LOGOUT:
+            console.log("Removing token from localStorage");
             localStorage.removeItem('token'); // Clear token from localStorage on logout
             return {
                 ...state,
@@ -54,3 +58,4 @@ export const authReducer = (state = initialState, { type, payload }) => {
             return state;
     }
 };
+
