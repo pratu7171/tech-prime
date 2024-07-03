@@ -1,7 +1,7 @@
 import { BaseUrl } from "../../utils/helper";
 import { PROJECT_ERROR, PROJECT_REQUEST, PROJECT_SUCCESS } from "./project.types";
 
-export const GetProject = (query, page, field) => async (dispatch) => {
+export const GetProject = (query,page,field) => async (dispatch) => {
     dispatch({ type: PROJECT_REQUEST });
     try {
         const response = await fetch(`${BaseUrl}/project/project?search=${query}&page=${page}&sort=${field}:asc`, {
@@ -10,27 +10,21 @@ export const GetProject = (query, page, field) => async (dispatch) => {
                 "Content-Type": "application/json",
             },
         });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        
         const data = await response.json();
-        console.log("this is the data u requested:"+ data);
-
-        if (data && data.project && data.project.length > 0) {
+        console.log(data)
+        if (data.projects.length > 0) {
             dispatch({ type: PROJECT_SUCCESS, payload: data });
         } else {
-            dispatch({ type: PROJECT_ERROR, payload: data.error || "No projects found" });
+            dispatch({ type: PROJECT_ERROR, payload: data.error });
         }
         return data;
-    } catch (error) {
-        dispatch({ type: PROJECT_ERROR, payload: error.message });
-        console.log(error);
+    } catch (e) {
+        dispatch({ type: PROJECT_ERROR, payload: e.message });
+        console.log(e);
     }
 };
 
-export const GetProjectInfo = (query, page, field) => async (dispatch) => {
+export const GetProjectInfo = (query,page,field) => async (dispatch) => {
     try {
         const response = await fetch(`${BaseUrl}/project/projectinfo`, {
             method: "GET",
@@ -54,7 +48,7 @@ export const GetDashboardChart = () => async () => {
             },
         });
         const data = await response.json();
-        console.log(data);
+        console.log(data)
         return data;
     } catch (e) {
         console.log(e);
@@ -71,20 +65,20 @@ export const UpdateProject = (url) => async (dispatch) => {
             },
         });
         const data = await response.json();
-        console.log(data);
-
-        if (data) {
-            return true;
-        } else {
-            return false;
+        console.log(data)
+        if(data){
+            return true
+        }else{
+            return false
         }
     } catch (e) {
         console.log(e);
     }
 };
 
+
 export const ProjectCreateData = (formdata) => async (dispatch) => {
-    dispatch({ type: PROJECT_REQUEST });
+    dispatch({ type: PROJECT_REQUEST })
     try {
         const response = await fetch(`${BaseUrl}/project/project/create`, {
             method: "POST",
@@ -95,10 +89,12 @@ export const ProjectCreateData = (formdata) => async (dispatch) => {
         });
         const data = await response.json();
         console.log(data);
-
+        
         return data;
-    } catch (e) {
-        dispatch({ type: PROJECT_ERROR, payload: e.message });
-        console.log(e);
     }
-};
+    catch (e) {
+        dispatch({ type: PROJECT_ERROR, payload: e.message })
+        console.log(e)
+    }
+}
+
