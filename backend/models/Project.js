@@ -15,27 +15,27 @@ const projectSchema = new mongoose.Schema({
     },
     Divison:{
         type:String,
-        required:true,
+        // required:true,
     },
     Category:{
         type:String,
-        required:true,
+        // required:true,
     },
     Priority:{
         type:String,
-        required:true,
+        // required:true,
     },
     Department:{
         type:String,
-        required:true,
+        // required:true,
     },
     StartDate:{
-        type:Date,
-        required:true,
+        type:String,
+        // required:true,
     },
     EndDate:{
-        type:Date,
-        required:true,
+        type:String,
+        // required:true,
     },
     Location:{
         type:String,

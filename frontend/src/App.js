@@ -1,23 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import Navbar from './components/Navbar';
+import AllRoutes from './pages/Allroutes';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="flex flex-col md:flex-row">
+        <div className="md:w-20">
+          <Navbar />
+        </div>
+        <div className="flex flex-col w-full md:w-[calc(100%-80px)] md:ml-20">
+          <AllRoutes />
+        </div>
+      </div>
     </div>
   );
 }
