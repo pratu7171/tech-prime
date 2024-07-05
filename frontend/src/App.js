@@ -9,11 +9,11 @@ function App() {
     <div className="App">
       <div className="flex flex-col md:flex-row">
         {isAuth && (
-          <div className="md:w-20">
+          <div className="md:w-[58px]">
             <Navbar />
           </div>
         )}
-        <div className={`flex flex-col w-full ${isAuth ? 'md:w-[calc(100%-80px)] md:ml-20' : ''}`}>
+        <div className={`flex flex-col w-full ${isAuth ? 'md:w-[1366px] md:ml-0' : ''}`}>
           <AllRoutes />
         </div>
       </div>

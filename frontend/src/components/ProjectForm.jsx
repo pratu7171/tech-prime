@@ -54,12 +54,12 @@ const ProjectForm = () => {
     };
 
     return (
-        <div className="w-full max-w-7xl mx-auto mb-12 rounded-lg p-6 shadow-lg">
-            <div className="flex flex-col lg:flex-row">
-                <div className="w-full lg:w-3/4 mb-5">
-                    <div className="mb-4">
+        <div className="w-full max-w-[1268] mx-auto mb-12 mt-[18px] md:mt-0 rounded-[10px] p-[18px] shadow-lg bg-[#ffffff]" style={{ boxShadow: '0 7px 18px 0 rgba(2,118,179,0.13)' }}>
+            <div className="flex flex-col md:flex-row">
+                <div className="w-full md:w-3/4 mb-5">
+                    <div className="mb-[44px]">
                         <input
-                            className="w-full lg:w-3/4 h-16 p-5 border border-gray-300 rounded-lg"
+                            className="box-border w-full md:w-[714px] md:h-[70px] h-16 p-5 font-nunito border-[1px] border-[#979797] rounded-[6px] "
                             placeholder="Enter Project Name"
                             name="ProjectName"
                             type="text"
@@ -70,11 +70,11 @@ const ProjectForm = () => {
                         )}
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div>
-                            <label className="block mb-1 text-gray-600">Reason</label>
+                            <label className="block mb-1 text-[#767676] text-[14px] leading-[19px] font-nunito ">Reason</label>
                             <select
-                                className="w-full h-12 border border-gray-300 rounded-lg"
+                                className="w-full h-[48px] box-border border border-[#979797] rounded-[6px] text-[#3f3f3f] text-[16px] leading-[22px] font-[400] pl-[16px]"
                                 onChange={handleInputChange}
                                 name="Reason"
                                 value={formData.Reason}
@@ -86,9 +86,9 @@ const ProjectForm = () => {
                         </div>
 
                         <div>
-                            <label className="block mb-1 text-gray-600">Type</label>
+                            <label className="block mb-1 text-[#767676] text-[14px] leading-[19px] font-nunito ">Type</label>
                             <select
-                                className="w-full h-12 border border-gray-300 rounded-lg"
+                                className="w-full h-[48px] box-border border border-[#979797] rounded-[6px] text-[#3f3f3f] text-[16px] leading-[22px] font-[400] pl-[16px]"
                                 onChange={handleInputChange}
                                 name="Type"
                                 value={formData.Type}
@@ -100,9 +100,9 @@ const ProjectForm = () => {
                         </div>
 
                         <div>
-                            <label className="block mb-1 text-gray-600">Divison</label>
+                            <label className="block mb-1 text-[#767676] text-[14px] leading-[19px] font-nunito ">Divison</label>
                             <select
-                                className="w-full h-12 border border-gray-300 rounded-lg"
+                                className="w-full h-[48px] box-border border border-[#979797] rounded-[6px] text-[#3f3f3f] text-[16px] leading-[22px] font-[400] pl-[16px]"
                                 onChange={handleInputChange}
                                 name="Divison"
                                 value={formData.Divison}
@@ -116,9 +116,9 @@ const ProjectForm = () => {
                         </div>
 
                         <div>
-                            <label className="block mb-1 text-gray-600">Category</label>
+                            <label className="block mb-1 text-[#767676] text-[14px] leading-[19px] font-nunito ">Category</label>
                             <select
-                                className="w-full h-12 border border-gray-300 rounded-lg"
+                                className="w-full h-[48px] box-border border border-[#979797] rounded-[6px] text-[#3f3f3f] text-[16px] leading-[22px] font-[400] pl-[16px]"
                                 onChange={handleInputChange}
                                 name="Category"
                                 value={formData.Category}
@@ -130,9 +130,9 @@ const ProjectForm = () => {
                         </div>
 
                         <div>
-                            <label className="block mb-1 text-gray-600">Priority</label>
+                            <label className="block mb-1 text-[#767676] text-[14px] leading-[19px] font-nunito ">Priority</label>
                             <select
-                                className="w-full h-12 border border-gray-300 rounded-lg"
+                                className="w-full h-[48px] box-border border border-[#979797] rounded-[6px] text-[#3f3f3f] text-[16px] leading-[22px] font-[400] pl-[16px]"
                                 onChange={handleInputChange}
                                 name="Priority"
                                 value={formData.Priority}
@@ -144,9 +144,9 @@ const ProjectForm = () => {
                         </div>
 
                         <div>
-                            <label className="block mb-1 text-gray-600">Department</label>
+                            <label className="block mb-1 text-[#767676] text-[14px] leading-[19px] font-nunito ">Department</label>
                             <select
-                                className="w-full h-12 border border-gray-300 rounded-lg"
+                                className="w-full h-[48px] box-border border border-[#979797] rounded-[6px] text-[#3f3f3f] text-[16px] leading-[22px] font-[400] pl-[16px]"
                                 onChange={handleInputChange}
                                 name="Department"
                                 value={formData.Department}
@@ -160,9 +160,9 @@ const ProjectForm = () => {
                         </div>
 
                         <div>
-                            <label className="block mb-1 text-gray-600">Start Date as per Project Plan</label>
+                            <label className="block mb-1 text-[#767676] text-[14px] leading-[19px] font-nunito ">Start Date as per Project Plan</label>
                             <input
-                                className="w-full h-12 border border-gray-300 rounded-lg"
+                                className="w-full h-[48px] box-border border border-[#979797] rounded-[6px] text-[#3f3f3f] text-[16px] leading-[22px] font-[400] pl-[16px]"
                                 type="date"
                                 onChange={handleInputStartDateChange}
                             />
@@ -172,9 +172,9 @@ const ProjectForm = () => {
                         </div>
 
                         <div>
-                            <label className="block mb-1 text-gray-600">End Date as per Project Plan</label>
+                            <label className="block mb-1 text-[#767676] text-[14px] leading-[19px] font-nunito ">End Date as per Project Plan</label>
                             <input
-                                className="w-full h-12 border border-gray-300 rounded-lg"
+                                className="w-full h-[48px] box-border border border-[#979797] rounded-[6px] text-[#3f3f3f] text-[16px] leading-[22px] font-[400] pl-[16px]"
                                 type="date"
                                 onChange={handleInputEndDateChange}
                             />
@@ -184,9 +184,9 @@ const ProjectForm = () => {
                         </div>
 
                         <div>
-                            <label className="block mb-1 text-gray-600">Location</label>
+                            <label className="block mb-1 text-[#767676] text-[14px] leading-[19px] font-nunito ">Location</label>
                             <select
-                                className="w-full h-12 border border-gray-300 rounded-lg"
+                                className="w-full h-[48px] box-border border border-[#979797] rounded-[6px] text-[#3f3f3f] text-[16px] leading-[22px] font-[400] pl-[16px]"
                                 onChange={handleInputChange}
                                 name="Location"
                                 value={formData.Location}
@@ -199,16 +199,16 @@ const ProjectForm = () => {
                         </div>
                     </div>
 
-                    <div className="flex justify-start lg:justify-end mt-5">
-                        <p className="text-gray-600">Status: </p>
-                        <p className="font-semibold">Registered</p>
+                    <div className="flex justify-start md:justify-end mt-5 mr-[175px] ">
+                        <p className="text-[#3f3f3f] text-[15px] leading-[22px] font-[300]">Status: </p>
+                        <p className="text-[#3f3f3f] text-[16px] leading-[22px] font-[600]">Registered</p>
                     </div>
                 </div>
 
-                <div>
+                <div flex>
                     <button
                         onClick={handleSubmit}
-                        className="w-44 h-12 rounded-full bg-blue-500 text-white"
+                        className="w-[153px] h-[36px] rounded-[18px] bg-[#025AAB] text-white font-nunito leading-[22px] ml-[120px]"
                     >
                         Save Project
                     </button>

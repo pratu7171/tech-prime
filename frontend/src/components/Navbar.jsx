@@ -21,23 +21,24 @@ function Navbar() {
     console.log("isAuth:", isAuth); // Check the value of isAuth here
 
     return (
-        <div className="fixed flex md:flex-col h-[50px] md:h-screen w-full md:w-20 xl:w-[58px] bg-[#ffffff] justify-center items-center shadow-lg left-0 bottom-0 md:bottom-auto mt-0 md:mt-0 xl:mt-20 z-10">
-            <div className="flex md:flex-col gap-[50px] md:gap-[50px] items-center">
-                <a href="/" className="mb-4">
+        <div className="fixed flex md:flex-col h-[56px] md:h-[768px] w-full md:w-[58px] gap-[50px] bottom-0 md:bottom-auto bg-[#ffffff] justify-center items-center shadow-lg left-0 z-10 md:rounded-none rounded-tl-3xl rounded-tr-3xl">
+            <div className="flex md:flex-col items-center md:mt-[40px] gap-[40px] md:gap-[0px] md:mb-[-13px] ml-[65px] md:ml-0">
+                <a href="/" className="md:mt-[60px] md:mr-[0px] mb-4 mr-[30px]">
                     <img src={location.pathname === "/" ? dashboardactive : dashboardicon} alt="Dashboard" />
                 </a>
-                <a href="/list" className="mb-4">
+                <a href="/list" className="md:mt-[39px] mb-4">
                     <img src={location.pathname === "/list" ? projectlistactive : projectlist} alt="List" />
                 </a>
-                <a href="/add-project" className="mb-4">
+                <div className="md:h-[1px] md:w-[33px] bg-[#979797] md:mt-[28.5px]"></div>
+                <a href="/add-project" className="md:mt-[28.5px] mb-4">
                     <img src={location.pathname === "/add-project" ? createProjectactive : createProject} alt="Add Project" />
                 </a>
-                {isAuth && (
-                    <div className="mb-4 cursor-pointer" onClick={handleLogout}>
-                        <img src={logouticon} alt="Logout" />
-                    </div>
-                )}
             </div>
+            {isAuth && (
+                <div className="md:mt-[170px] md:mb-0 md:mr-0 mr-7 mb-[1565px] cursor-pointer" onClick={handleLogout}>
+                    <img src={logouticon} alt="Logout" />
+                </div>
+            )}
         </div>
     );
 }

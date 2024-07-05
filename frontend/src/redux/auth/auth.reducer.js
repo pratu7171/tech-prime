@@ -1,4 +1,3 @@
-
 import { LOGIN_ERROR, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT } from "./auth.types";
 
 // Retrieve token from localStorage
@@ -11,7 +10,6 @@ console.log("Token from localStorage at initialization:", token);
 const initialState = {
     isAuth: !!token, // Consider initializing isAuth based on token presence
     token: token || "",
-    data: [],
     loading: false,
     error: false,
     message: "",
@@ -25,6 +23,7 @@ export const authReducer = (state = initialState, { type, payload }) => {
                 ...state,
                 loading: true,
                 error: false,
+                message: "", // Clear previous login error message
             };
         case LOGIN_SUCCESS:
             console.log("Setting token to localStorage:", payload.token);
@@ -43,7 +42,7 @@ export const authReducer = (state = initialState, { type, payload }) => {
                 isAuth: false,
                 loading: false,
                 error: true,
-                message: payload.message,
+                message: payload, // payload directly contains the error message
             };
         case LOGOUT:
             console.log("Removing token from localStorage");
@@ -58,4 +57,3 @@ export const authReducer = (state = initialState, { type, payload }) => {
             return state;
     }
 };
-

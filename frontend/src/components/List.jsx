@@ -1,13 +1,13 @@
-
 import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { GetProject, UpdateProject } from '../redux/project/project.action';
 import Paginations from './Pagination';
+import Sort from "../assets/sorting.svg";
 
 const sortlist = [
-      "Priority", "ProjectName", "Reason", "Type", "Divison", "Category",
-      "Department", "StartDate", "EndDate", "Location", "Status"
-    ];
+  "Priority", "ProjectName", "Reason", "Type", "Divison", "Category",
+  "Department", "StartDate", "EndDate", "Location", "Status"
+];
 
 const List = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -29,7 +29,6 @@ const List = () => {
   }, [dispatch, searchTerm, page, field]);
 
   useEffect(() => {
-    
     if (currentdata && currentdata.length > 0) {
       setData(currentdata);
     } else {
@@ -45,12 +44,17 @@ const List = () => {
     timerRef.current = setTimeout(() => {
       setPage(1);
       dispatch(GetProject(searchTerm, page, field));
-    }, 2000);
+    }, 20000);
 
     return () => {
       clearTimeout(timerRef.current);
     };
   }, [searchTerm, page, field, dispatch]);
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+    setPage(1); // Reset page when search term changes
+  };
 
   const handleClose = (id) => {
     let url = `/statusclose/${id}`;
@@ -104,28 +108,34 @@ const List = () => {
   }, []);
 
   return (
-    <div className="w-full lg:w-full mx-auto rounded-lg mb-12">
-      <div className="p-5 flex flex-col bg-white shadow-lg rounded-lg">
+    <div className="w-full md:w-[1276px] md:h-[595px] mx-auto rounded-[10px] md:pt-0 pt-[20px]">
+      <div className="pt-[20px] flex flex-col md:bg-white bg-[#F3F5F7] rounded-[10px]" style={{ boxShadow: window.innerWidth >= 1024 ? '0 7px 18px 0 rgba(2, 118, 179, 0.13)' : 'none' }}>
         <div className="flex justify-between">
           <input
             type="text"
             placeholder="Search"
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="mb-4 w-48 border-none border-b border-gray-500"
+            onChange={handleSearchChange}
+            className="mb-[16px] w-[280px] md:w-[252px] h-[30px] ml-[16px] md:ml-[20px] border-b-[1px] md:bg-white bg-[#f3f5f7] border-[#979797] font-nunito text-[18px] leading-[24px] text-[#414950]"
           />
           <div className="text-red-500 font-bold">
             {isLoading ? "....Loading" : ""}
           </div>
           <div className="flex">
-            <span className="text-gray-500 mt-1">Sort By :</span>
+            <div className="font-nunito text-[16px] leading-[22px] text-[#96A1A9] mt-1">
+            {screensize>=1024 ?(
+              <span>Sort By :</span>
+            ):(
+              <img src={Sort} alt='Sort'></img>
+            ) }
+            </div>
             <select
               value={field}
               onChange={(e) => {
                 setField(e.target.value);
                 setPage(1); // Reset page when sorting changes
               }}
-              className="border-none"
+              className="border-none font-nunito text-[16px] leading-[22px] md:bg-white bg-[#f3f5f7] text-[#3f3f3f] mb-[15px]"
             >
               {sortlist.map((el, index) => (
                 <option key={index} value={el}>{el}</option>
@@ -135,17 +145,17 @@ const List = () => {
         </div>
         {screensize >= 1024 ? (
           <table className="table-auto w-full overflow-x-auto">
-            <thead className="bg-blue-100">
+            <thead className="bg-[#EBF5FF] w-[1276px] h-[40px] text-left text-[14px] leading-[19px] text-[#3f3f3f] font-nunito font-[500]">
               <tr>
-                <th className="p-2 text-center">Project Name</th>
-                <th className="p-2 text-center">Reason</th>
-                <th className="p-2 text-center">Type</th>
-                <th className="p-2 text-center">Division</th>
-                <th className="p-2 text-center">Category</th>
-                <th className="p-2 text-center">Priority</th>
-                <th className="p-2 text-center">Dept</th>
-                <th className="p-2 text-center">Location</th>
-                <th className="p-2 text-center">Status</th>
+                <th className="pl-[20px] text-left">Project Name</th>
+                <th className="pl-[20px] text-left">Reason</th>
+                <th className="pl-[20px] text-left">Type</th>
+                <th className="pl-[20px] text-left">Division</th>
+                <th className="pl-[20px] text-left">Category</th>
+                <th className="pl-[20px] text-left">Priority</th>
+                <th className="pl-[20px] text-left">Dept</th>
+                <th className="pl-[20px] text-left">Location</th>
+                <th className="pl-[20px] text-left">Status</th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -156,22 +166,22 @@ const List = () => {
                 <tr key={item._id} className="text-sm">
                   <td className="p-2 text-center">
                     <div className="flex flex-col">
-                      <span>{item.ProjectName}</span>
-                      <span className="text-xs">{item.StartDate} to {item.EndDate}</span>
+                      <span className='text-left pl-[14px] text-[16px] leading-[22px] text-[#414950] font-nunito font-[800] tracking-wider'>{item.ProjectName}</span>
+                      <span className="text-left pl-[14px] text-[14px] leading-[19px] text-[#6B6B6B] font-nunito">{item.StartDate} to {item.EndDate}</span>
                     </div>
                   </td>
-                  <td className="p-2 text-center">{item.Reason}</td>
-                  <td className="p-2 text-center">{item.Type}</td>
-                  <td className="p-2 text-center">{item.Divison}</td>
-                  <td className="p-2 text-center">{item.Category}</td>
-                  <td className="p-2 text-center">{item.Priority}</td>
-                  <td className="p-2 text-center">{item.Department}</td>
-                  <td className="p-2 text-center">{item.Location}</td>
-                  <td className="p-2 text-center">{item.Status}</td>
+                  <td className="pl-[20px] text-left text-[14px] leading-[19px] font-nunito text-[#3f3f3f]">{item.Reason}</td>
+                  <td className="pl-[20px] text-left text-[14px] leading-[19px] font-nunito text-[#3f3f3f]">{item.Type}</td>
+                  <td className="pl-[20px] text-left text-[14px] leading-[19px] font-nunito text-[#3f3f3f]">{item.Divison}</td>
+                  <td className="pl-[20px] text-left text-[14px] leading-[19px] font-nunito text-[#3f3f3f]">{item.Category}</td>
+                  <td className="pl-[20px] text-left text-[14px] leading-[19px] font-nunito text-[#3f3f3f]">{item.Priority}</td>
+                  <td className="pl-[20px] text-left text-[14px] leading-[19px] font-nunito text-[#3f3f3f]">{item.Department}</td>
+                  <td className="pl-[20px] text-left text-[14px] leading-[19px] font-nunito text-[#3f3f3f]">{item.Location}</td>
+                  <td className="pl-[20px] text-left text-[14px] leading-[19px] font-nunito text-[#3f3f3f] font-[800]">{item.Status}</td>
                   <td className="p-2 text-center">
                     <button
                       onClick={() => handleStart(item._id)}
-                      className="px-3 py-1 text-sm bg-blue-500 text-white rounded-full"
+                      className="px-[17px] py-[3px] text-[14px] leading-[19px] bg-[#025ABB] text-white rounded-[18px] font-nunito"
                     >
                       Start
                     </button>
@@ -179,7 +189,7 @@ const List = () => {
                   <td className="p-2 text-center">
                     <button
                       onClick={() => handleClose(item._id)}
-                      className="px-3 py-1 text-sm bg-red-500 text-white rounded-full"
+                      className="px-[15px] py-[3px] text-[14px] leading-[19px] text-[#025AAB] border border-[#025AAB] rounded-[18px] font-nunito"
                     >
                       Close
                     </button>
@@ -187,7 +197,7 @@ const List = () => {
                   <td className="p-2 text-center">
                     <button
                       onClick={() => handleCancel(item._id)}
-                      className="px-3 py-1 text-sm bg-yellow-500 text-white rounded-full"
+                      className="px-[11px] py-[3px] text-[14px] leading-[19px] text-[#025AAB] border border-[#025AAB] rounded-[18px] font-nunito"
                     >
                       Cancel
                     </button>
@@ -199,46 +209,67 @@ const List = () => {
         ) : (
           <div className="grid grid-cols-1 gap-4">
             {data.length > 0 && data.map((item) => (
-              <div key={item._id} className="p-4 bg-gray-100 rounded-lg">
-                <div className="flex justify-between mb-2">
-                  <div>
-                    <span className="font-semibold">{item.ProjectName}</span>
-                    <span className="text-xs"> ({item.StartDate} to {item.EndDate})</span>
+              <div key={item._id} className="pt-[20px] pl-[17px] pr-[15px] pb-[16px] bg-white rounded-[10px] w-[328px] h-[257px] ml-3">
+                <div className="flex justify-between mb-[16px]">
+                  <div className='flex flex-col'>
+                    <span className="leading-[22px] text-[16px] font-nunito text-[#414950] tracking-wider font-[800]">{item.ProjectName}</span>
+                    <span className="text-[14px] leading-[19px] text-[#6B6B6B] font-nunito"> ({item.StartDate} to {item.EndDate})</span>
                   </div>
                   <div>
-                    <span className="text-sm font-bold">{item.Priority}</span>
+                    <span className="text-[14px] leading-[19px] text-[#00284C] font-nunito font-[600]">{item.Status}</span>
                   </div>
                 </div>
                 <div className="flex justify-between">
-                  <div className="text-xs">Reason: {item.Reason}</div>
-                  <div className="text-xs">Type: {item.Type}</div>
+                  <div className="text-[14px] leading-[19px] text-[#898989] font-nunito">Reason: 
+                  <span className="text-[14px] leading-[19px] text-[#3F3F3F] font-nunito ml-[2px]">{item.Reason}</span>
+                  </div>
                 </div>
-                <div className="flex justify-between">
-                  <div className="text-xs">Division: {item.Divison}</div>
-                  <div className="text-xs">Category: {item.Category}</div>
+                <div className="mt-[5px] flex">
+                <div className="text-[14px] leading-[19px] text-[#898989] font-nunito">Type:
+                  <span className="text-[14px] leading-[19px] text-[#3F3F3F] font-nunito ml-[2px]">{item.Type}</span>
+                  </div>
+                  <div className='w-[5px] h-[5px] rounded-full bg-[#96A1A9] mt-[7px] ml-[6px]'></div>
+                  <div className="text-[14px] leading-[19px] text-[#898989] font-nunito ml-[6px]">Category:
+                  <span className="text-[14px] leading-[19px] text-[#3F3F3F] font-nunito ml-[2px]">{item.Category}</span>
+                  </div>
                 </div>
-                <div className="flex justify-between">
-                  <div className="text-xs">Department: {item.Department}</div>
-                  <div className="text-xs">Location: {item.Location}</div>
+                <div className="flex mt-[5px]">
+                  <div className="text-[14px] leading-[19px] text-[#898989] font-nunito">Div:
+                  <span className="text-[14px] leading-[19px] text-[#3F3F3F] font-nunito ml-[2px]">{item.Divison}</span>
+                  </div>
+                  <div className='w-[5px] h-[5px] rounded-full bg-[#96A1A9] mt-[7px] ml-[6px]'></div>
+                  <div className="text-[14px] leading-[19px] text-[#898989] font-nunito ml-[6px]">Dept:
+                  <span className="text-[14px] leading-[19px] text-[#3F3F3F] font-nunito ml-[2px]">{item.Department}</span>
+                  </div>
                 </div>
-                <div className="flex justify-between">
-                  <div className="text-xs">Status: {item.Status}</div>
-                  <div>
-                    <button
+                <div className="mt-[5px]">
+                  <div className="text-[14px] leading-[19px] text-[#898989] font-nunito">Location:
+                  <span className="text-[14px] leading-[19px] text-[#3F3F3F] font-nunito ml-[2px]">{item.Location}</span>
+                  </div>
+                  </div>
+                  <div className="mt-[5px]">
+                  <div className="text-[14px] leading-[19px] text-[#898989] font-nunito">Priority:
+                  <span className="text-[14px] leading-[19px] text-[#3F3F3F] font-nunito ml-[2px]">{item.Priority}</span>
+                  </div>
+                  </div>
+                  <div className='mt-[10px]'>
+                  <div className='gap-[16px]'>
+                  <button
                       onClick={() => handleStart(item._id)}
-                      className="px-2 py-1 text-xs bg-blue-500 text-white rounded-full"
+                      className="px-[17px] w-[88px] h-[36px] py-[3px] text-[14px] leading-[19px] bg-[#025ABB] text-white rounded-[18px] font-nunito"
                     >
                       Start
                     </button>
+                    
                     <button
                       onClick={() => handleClose(item._id)}
-                      className="px-2 py-1 ml-2 text-xs bg-red-500 text-white rounded-full"
+                      className="px-[15px] py-[3px] w-[88px] h-[36px] text-[14px] leading-[19px] text-[#025AAB] border border-[#025AAB] rounded-[18px] font-nunito ml-[16px]"
                     >
                       Close
                     </button>
                     <button
                       onClick={() => handleCancel(item._id)}
-                      className="px-2 py-1 ml-2 text-xs bg-yellow-500 text-white rounded-full"
+                      className="px-[11px] py-[3px] w-[88px] h-[36px] text-[14px] leading-[19px] text-[#025AAB] border border-[#025AAB] rounded-[18px] font-nunito ml-[16px]"
                     >
                       Cancel
                     </button>
@@ -248,14 +279,14 @@ const List = () => {
             ))}
           </div>
         )}
-        <Paginations
-          handlePrevious={handlePrevious}
-          handleNext={handleNext}
-          page={page}
-          pageCount={totalPage}
-          setPage={setPage}
-        />
       </div>
+      <Paginations
+        handlePrevious={handlePrevious}
+        handleNext={handleNext}
+        page={page}
+        pageCount={totalPage}
+        setPage={setPage}
+      />
     </div>
   );
 };

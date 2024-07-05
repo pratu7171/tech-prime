@@ -5,19 +5,19 @@ import Logo from '../assets/Logo.svg';
 
 const AddProject = () => {
   return (
+    <div className='bg-[#f3f5f7] h-screen w-screen'>
     <div
-      className="absolute bg-no-repeat bg-cover w-full md:w-[calc(100%-80px)] flex flex-col min-h-screen p-5 md:p-10"
+      className="absolute bg-no-repeat bg-cover md:w-[1308PX] flex flex-col p-[18px] h-[55px] md:h-[150px] md:ml-[58px] w-full"
       style={{ backgroundImage: `url(${loginbg})` }}
     >
       <div className="w-full md:w-[calc(100%-80px)] flex">
-        <p className="text-white text-left text-lg font-bold">
-          {'Create Project'}
-        </p>
-        <div className="m-auto">
-          <img src={Logo} alt="logo" className="-mt-4 mb-4" />
+        <p className="text-white text-left font-nunito text-[22px] leading-[30px] md:mt-[21px] font-[800] ml-[12px]">{'< Create Project'}</p>
+        <div className="hidden md:block m-auto">
+          <img src={Logo} alt="logo" className="mt-[9px] mb-[26px]" />
         </div>
       </div>
       <ProjectForm />
+    </div>
     </div>
   );
 };

@@ -1,6 +1,7 @@
 
 import React from 'react';
 
+
 const Paginations = ({ handlePrevious, handleNext, page, pageCount, setPage }) => {
     const renderPageButtons = () => {
         const buttons = [];
@@ -10,7 +11,7 @@ const Paginations = ({ handlePrevious, handleNext, page, pageCount, setPage }) =
             <button
                 key={1}
                 onClick={() => setPage(1)}
-                className={`px-4 py-2 mx-1 rounded-full border ${page === 1 ? 'border-aqua' : ''}`}
+                className={`px-[8px] pb-[3px] mx-1 rounded-full border ${page === 1 ? 'bg-[#0cc9eb]' : ''}`}
             >
                 1
             </button>
@@ -22,7 +23,7 @@ const Paginations = ({ handlePrevious, handleNext, page, pageCount, setPage }) =
                 <button
                     key="left-ellipsis"
                     disabled
-                    className="px-4 py-2 mx-1 rounded-full border-none"
+                    className="px-[8px] pb-[3px]  mx-1 rounded-full border-none"
                 >
                     ...
                 </button>
@@ -35,7 +36,7 @@ const Paginations = ({ handlePrevious, handleNext, page, pageCount, setPage }) =
                 <button
                     key={i}
                     onClick={() => setPage(i)}
-                    className={`px-4 py-2 mx-1 rounded-full border ${page === i ? 'border-aqua' : ''}`}
+                    className={`px-[8px] pb-[3px]  mx-1 rounded-full border ${page === i ? 'border-aqua' : ''}`}
                 >
                     {i}
                 </button>
@@ -48,7 +49,7 @@ const Paginations = ({ handlePrevious, handleNext, page, pageCount, setPage }) =
                 <button
                     key="right-ellipsis"
                     disabled
-                    className="px-4 py-2 mx-1 rounded-full border-none"
+                    className="px-[8px] pb-[3px]  mx-1 rounded-full border-none"
                 >
                     .....
                 </button>
@@ -61,7 +62,7 @@ const Paginations = ({ handlePrevious, handleNext, page, pageCount, setPage }) =
                 <button
                     key={pageCount}
                     onClick={() => setPage(pageCount)}
-                    className={`px-4 py-2 mx-1 rounded-full border ${page === pageCount ? 'border-aqua' : ''}`}
+                    className={`px-[8px] pb-[3px]  mx-1 rounded-full border ${page === pageCount ? 'border-aqua' : ''}`}
                 >
                     {pageCount}
                 </button>
@@ -71,13 +72,13 @@ const Paginations = ({ handlePrevious, handleNext, page, pageCount, setPage }) =
     };
 
     return (
-        <div className="my-4 flex justify-center">
+        <div className="flex justify-center w-[300px] h-[25px] md:ml-[500px] my-[10px]">
             {pageCount > 0 && (
                 <div className="flex justify-end">
                     <button
                         onClick={handlePrevious}
                         disabled={page === 1}
-                        className="px-4 py-2 mx-1 rounded border-none cursor-pointer disabled:opacity-50"
+                        className="px-4 py-[2px] mx-1 rounded border-none cursor-pointer disabled:opacity-50"
                     >
                         {'<< <'}
                     </button>
@@ -85,7 +86,7 @@ const Paginations = ({ handlePrevious, handleNext, page, pageCount, setPage }) =
                     <button
                         onClick={handleNext}
                         disabled={page === pageCount}
-                        className="px-4 py-2 mx-1 rounded border-none cursor-pointer disabled:opacity-50"
+                        className="px-4 py-[2px] mx-1 rounded border-none cursor-pointer disabled:opacity-50"
                     >
                         {'> >>'}
                     </button>

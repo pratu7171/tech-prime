@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { login } from '../redux/auth/auth.action';
 import loginbg from '../assets/login-bg.svg';
 import Logo from '../assets/Logo.svg';
+import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -48,66 +49,65 @@ const Login = () => {
   }, [isAuth, navigate]);
 
   return (
-    <div className="absolute bg-no-repeat w-full md:w-[calc(100%-80px)]" style={{ backgroundImage: `url(${loginbg})` }}>
-      <div className="flex flex-col justify-center items-center mt-5 p-5">
+    <div className="absolute bg-no-repeat  md:w-[1366px] md:h-full h-[350px] md:rounded-none " style={{ backgroundImage: `url(${loginbg})`,borderBottomLeftRadius: '87px' }}>
+      <div className="flex flex-col justify-center items-center md:mt-[70px] md:mb-[0] mt-[120px] mb-[85px]">
         <div>
           <img src={Logo} alt="logo" />
         </div>
-        <p className="text-white text-xl">Online Project Management</p>
+        <p className="text-[#ffffff] text-[16px] leading-[22px] text-left font-nunito m-[26px] font-[300]">Online Project Management</p>
       </div>
-      <div className="w-80 bg-white p-10 pb-15 mx-auto border border-gray-300 rounded-lg shadow-lg mb-24">
-        <p className="text-xl text-center p-5">Login To Get Started</p>
-        <div className={`mb-4 ${emailError ? 'text-red-500' : ''}`}>
-          <label>Email</label>
-          <input
-            type="email"
-            placeholder="Enter your email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className={`w-full border ${emailError ? 'border-red-500' : 'border-gray-300'} p-2 rounded`}
-          />
-          {emailError && (
-            <p className="mt-2 text-red-500 text-left">Email is required</p>
-          )}
-        </div>
-        <div className={`mb-4 ${passwordError ? 'text-red-500' : ''}`}>
-          <label>Password</label>
-          <div className="relative">
+      <div className="w-[410px] h-[422px] bg-white p-[36px] mx-auto rounded-[10px] mb-24" style={{ boxShadow: '0 7px 18px 0 rgba(2, 118, 179, 0.13)' }}>
+        <p className="text-[20px] text-left md:text-center font-nunito leading-[27px] pt-[14px] pb-[]">Login to get started</p>
+        <form onSubmit={handleLogin}>
+          <div className={`mt-[35px] mb-[25px] ${emailError ? 'text-[#FF3838]' : ''}`}>
+            <p className='font-nunito text-[14px] leading-[19px] font-[300]'>Email</p>
             <input
-              type={showPassword ? 'text' : 'password'}
-              placeholder="Enter your password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className={`w-full border ${passwordError ? 'border-red-500' : 'border-gray-300'} p-2 rounded`}
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className={`w-[337px] h-[48px] border ${emailError ? 'border-[#FF3838]' : 'border-[#979797]'} p-2 rounded-[6px]`}
             />
+            {emailError && (
+              <p className="mt-1 text-[#FF3838] text-left font-nunito text-[14px] leading-[19px] font-[300]">Email is required</p>
+            )}
+          </div>
+          <div className={`mb-[25px] ${passwordError ? 'text-[#FF3838]' : ''}`}>
+            <p className='font-nunito text-[14px] leading-[19px] font-[300]'>Password</p>
+            <div className="relative">
+              <input
+                type={showPassword ? 'text' : 'password'}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className={`w-[337px] h-[48px] border ${passwordError ? 'border-[#FF3838]' : 'border-[#979797]'} p-2 rounded-[6px]`}
+              />
+              <button
+                type="button"
+                aria-label={showPassword ? 'Hide password' : 'Show password'}
+                onClick={toggleShowPassword}
+                className="absolute inset-y-0 right-0 pr-3 flex items-center"
+              >
+                {showPassword ? <ViewOffIcon /> : <ViewIcon />}
+              </button>
+            </div>
+            {passwordError && (
+              <p className="mt-1 text-[#FF3838] text-left font-nunito text-[14px] leading-[19px] font-[300]">Password is required</p>
+            )}
+          </div>
+          <div className="flex justify-center">
             <button
-              aria-label={showPassword ? 'Hide password' : 'Show password'}
-              onClick={toggleShowPassword}
-              className="absolute inset-y-0 right-0 pr-3 flex items-center"
+              type="submit"
+              className="w-[169px] text-center h-[36px] bg-[#035FB2] text-white rounded-[18px] mt-[15px] font-nunito leading-[22px] text-[16px] font-[300]"
             >
-              {/* {showPassword ? <ViewOffIcon /> : <ViewIcon />} */} 
-              {/* here need to install the icon */}
-              {showPassword ? <p>View</p> : <p>Hide</p>}
-
+              Login
             </button>
           </div>
-          {passwordError && (
-            <p className="mt-2 text-red-500 text-left">Password is required</p>
-          )}
-        </div>
-        <div className="flex justify-center">
-          <button
-            className="m-4 w-48 bg-teal-600 text-white p-2 rounded-full"
-            onClick={handleLogin}
-          >
-            Login
-          </button>
-        </div>
-        <div className="flex justify-center">
-          {message && (
-            <p className="mt-2 text-red-500 text-left">{message}</p>
-          )}
-        </div>
+          
+        </form>
+        <div className="flex justify-center mt-[80px]">
+            {message && !isAuth && (
+              <p className="mt-2 text-[#FF3838] text-left font-nunito text-[14px] leading-[19px] font-[300]">{message}</p>
+            )}
+          </div>
       </div>
     </div>
   );
