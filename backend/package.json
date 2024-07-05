@@ -1,4 +1,14 @@
 {
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "build": "npm i"
+  },
+  "author": "",
+  "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
@@ -10,16 +20,5 @@
     "mongodb": "^6.8.0",
     "mongoose": "^8.4.4",
     "nodemon": "^3.1.4"
-  },
-  "name": "backend",
-  "version": "1.0.0",
-  "main": "index.js",
-  "devDependencies": {},
-  "scripts": {
-    "dev": "nodemon index.js",
-    "build": "npm i"
-  },
-  "author": "",
-  "license": "ISC",
-  "description": ""
+  }
 }
