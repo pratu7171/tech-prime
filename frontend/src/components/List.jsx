@@ -163,7 +163,7 @@ const List = () => {
             </thead>
             <tbody>
               {data.length > 0 && data.map((item) => (
-                <tr key={item._id} className="text-sm">
+                <tr key={item._id}>
                   <td className="p-2 text-center">
                     <div className="flex flex-col">
                       <span className='text-left pl-[14px] text-[16px] leading-[22px] text-[#414950] font-nunito font-[800] tracking-wider'>{item.ProjectName}</span>
