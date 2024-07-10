@@ -17,11 +17,18 @@ const ProjectForm = () => {
         ProjectName: "",
     });
 
+    const [errors, setErrors] = useState({
+        ProjectName: false,
+        StartDate: false,
+        EndDate: false,
+    });
+
     let message = useSelector((store) => store.projectReducer.message)
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
+        setErrors({ ...errors, [name]: false });
     };
 
     const handleInputStartDateChange = (e) => {
@@ -29,6 +36,7 @@ const ProjectForm = () => {
             ...prev,
             StartDate: e.target.value,
         }));
+        setErrors((prev) => ({ ...prev, StartDate: false }));
     };
 
     const handleInputEndDateChange = (e) => {
@@ -36,11 +44,20 @@ const ProjectForm = () => {
             ...prev,
             EndDate: e.target.value,
         }));
+        setErrors((prev) => ({ ...prev, EndDate: false }));
     };
 
     const handleSubmit = () => {
-        console.log(formData)
-        if (formData.ProjectName !== "" && formData.StartDate !== "" && formData.EndDate !== "") {
+        const newErrors = {
+            ProjectName: formData.ProjectName === "",
+            StartDate: formData.StartDate === "",
+            EndDate: formData.EndDate === "",
+        };
+        setErrors(newErrors);
+
+        const hasErrors = Object.values(newErrors).some((error) => error);
+
+        if (!hasErrors) {
             dispatch(ProjectCreateData(formData))
                 .then((res) => {
                     alert(res.message);
@@ -54,25 +71,25 @@ const ProjectForm = () => {
     };
 
     return (
-        <div className="w-full max-w-[1268] mx-auto md:ml-0 ml-[10px] mb-12  mt-[-50px] md:mt-0 rounded-[10px] p-[18px] pt-[22px] shadow-lg bg-[#ffffff]" style={{ boxShadow: '0 7px 18px 0 rgba(2,118,179,0.13)' }}>
+        <div className="w-full max-w-[1268px] mx-auto md:ml-0 ml-[10px] mb-12 mt-[-50px] md:mt-0 rounded-[10px] p-[18px] pt-[22px] shadow-lg bg-[#ffffff]" style={{ boxShadow: '0 7px 18px 0 rgba(2,118,179,0.13)' }}>
             <div className="flex flex-col md:flex-row">
                 <div className="w-full md:w-3/4 mb-5">
                     <div className="mb-[44px]">
                         <input
-                            className="box-border w-full md:w-[714px] md:h-[70px] h-16 p-5 font-nunito border-[1px] border-[#979797] rounded-[6px] "
+                            className={`box-border w-full md:w-[714px] md:h-[70px] h-16 p-5 font-nunito border-[1px] ${errors.ProjectName ? 'border-red-500' : 'border-[#979797]'} rounded-[6px] `}
                             placeholder="Enter Project Name"
                             name="ProjectName"
                             type="text"
                             onChange={handleInputChange}
                         />
-                        {formData.ProjectName === "" && (
+                        {errors.ProjectName && (
                             <p className="mt-2 text-red-500">Project Name is required!</p>
                         )}
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div>
-                            <label className="block mb-1 text-[#767676] text-[14px] leading-[19px] font-nunito ">Reason</label>
+                            <label className="block mb-1 text-[#767676] text-[14px] leading-[19px] font-nunito">Reason</label>
                             <select
                                 className="w-full h-[48px] box-border border border-[#979797] rounded-[6px] text-[#3f3f3f] text-[16px] leading-[22px] font-[400] pl-[16px]"
                                 onChange={handleInputChange}
@@ -86,7 +103,7 @@ const ProjectForm = () => {
                         </div>
 
                         <div>
-                            <label className="block mb-1 text-[#767676] text-[14px] leading-[19px] font-nunito ">Type</label>
+                            <label className="block mb-1 text-[#767676] text-[14px] leading-[19px] font-nunito">Type</label>
                             <select
                                 className="w-full h-[48px] box-border border border-[#979797] rounded-[6px] text-[#3f3f3f] text-[16px] leading-[22px] font-[400] pl-[16px]"
                                 onChange={handleInputChange}
@@ -100,7 +117,7 @@ const ProjectForm = () => {
                         </div>
 
                         <div>
-                            <label className="block mb-1 text-[#767676] text-[14px] leading-[19px] font-nunito ">Divison</label>
+                            <label className="block mb-1 text-[#767676] text-[14px] leading-[19px] font-nunito">Divison</label>
                             <select
                                 className="w-full h-[48px] box-border border border-[#979797] rounded-[6px] text-[#3f3f3f] text-[16px] leading-[22px] font-[400] pl-[16px]"
                                 onChange={handleInputChange}
@@ -116,7 +133,7 @@ const ProjectForm = () => {
                         </div>
 
                         <div>
-                            <label className="block mb-1 text-[#767676] text-[14px] leading-[19px] font-nunito ">Category</label>
+                            <label className="block mb-1 text-[#767676] text-[14px] leading-[19px] font-nunito">Category</label>
                             <select
                                 className="w-full h-[48px] box-border border border-[#979797] rounded-[6px] text-[#3f3f3f] text-[16px] leading-[22px] font-[400] pl-[16px]"
                                 onChange={handleInputChange}
@@ -130,7 +147,7 @@ const ProjectForm = () => {
                         </div>
 
                         <div>
-                            <label className="block mb-1 text-[#767676] text-[14px] leading-[19px] font-nunito ">Priority</label>
+                            <label className="block mb-1 text-[#767676] text-[14px] leading-[19px] font-nunito">Priority</label>
                             <select
                                 className="w-full h-[48px] box-border border border-[#979797] rounded-[6px] text-[#3f3f3f] text-[16px] leading-[22px] font-[400] pl-[16px]"
                                 onChange={handleInputChange}
@@ -144,7 +161,7 @@ const ProjectForm = () => {
                         </div>
 
                         <div>
-                            <label className="block mb-1 text-[#767676] text-[14px] leading-[19px] font-nunito ">Department</label>
+                            <label className="block mb-1 text-[#767676] text-[14px] leading-[19px] font-nunito">Department</label>
                             <select
                                 className="w-full h-[48px] box-border border border-[#979797] rounded-[6px] text-[#3f3f3f] text-[16px] leading-[22px] font-[400] pl-[16px]"
                                 onChange={handleInputChange}
@@ -160,31 +177,31 @@ const ProjectForm = () => {
                         </div>
 
                         <div>
-                            <label className="block mb-1 text-[#767676] text-[14px] leading-[19px] font-nunito ">Start Date as per Project Plan</label>
+                            <label className="block mb-1 text-[#767676] text-[14px] leading-[19px] font-nunito">Start Date as per Project Plan</label>
                             <input
-                                className="w-full h-[48px] box-border border border-[#979797] rounded-[6px] text-[#3f3f3f] text-[16px] leading-[22px] font-[400] pl-[16px]"
+                                className={`w-full h-[48px] box-border border ${errors.StartDate ? 'border-red-500' : 'border-[#979797]'} rounded-[6px] text-[#3f3f3f] text-[16px] leading-[22px] font-[400] pl-[16px]`}
                                 type="date"
                                 onChange={handleInputStartDateChange}
                             />
-                            {formData.StartDate === "" && (
+                            {errors.StartDate && (
                                 <p className="mt-2 text-red-500">Start Date is required!</p>
                             )}
                         </div>
 
                         <div>
-                            <label className="block mb-1 text-[#767676] text-[14px] leading-[19px] font-nunito ">End Date as per Project Plan</label>
+                            <label className="block mb-1 text-[#767676] text-[14px] leading-[19px] font-nunito">End Date as per Project Plan</label>
                             <input
-                                className="w-full h-[48px] box-border border border-[#979797] rounded-[6px] text-[#3f3f3f] text-[16px] leading-[22px] font-[400] pl-[16px]"
+                                className={`w-full h-[48px] box-border border ${errors.EndDate ? 'border-red-500' : 'border-[#979797]'} rounded-[6px] text-[#3f3f3f] text-[16px] leading-[22px] font-[400] pl-[16px]`}
                                 type="date"
                                 onChange={handleInputEndDateChange}
                             />
-                            {formData.EndDate === "" && (
+                            {errors.EndDate && (
                                 <p className="mt-2 text-red-500">End Date is required!</p>
                             )}
                         </div>
 
                         <div>
-                            <label className="block mb-1 text-[#767676] text-[14px] leading-[19px] font-nunito ">Location</label>
+                            <label className="block mb-1 text-[#767676] text-[14px] leading-[19px] font-nunito">Location</label>
                             <select
                                 className="w-full h-[48px] box-border border border-[#979797] rounded-[6px] text-[#3f3f3f] text-[16px] leading-[22px] font-[400] pl-[16px]"
                                 onChange={handleInputChange}
