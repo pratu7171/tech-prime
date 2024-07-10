@@ -69,12 +69,18 @@ const BarChart = () => {
           },
           autoSkip: false,
           maxRotation: 0,
-          padding: 0,
+          padding: 5,
         },
       },
       y: {
         grid: {
           display: false,
+        },
+        ticks: {
+          stepSize: 5,
+          min: 0,
+          max: 50,
+          callback: (value) => `${value}`,
         },
       },
     },
@@ -91,6 +97,19 @@ const BarChart = () => {
         anchor: "end",
         offset: -17,
         align: "start",
+      },
+    },
+    layout: {
+      padding: {
+        left: 0,
+        right: 0,
+        top: 15,
+      },
+    },
+    elements: {
+      bar: {
+        barThickness: 10, 
+        categorySpacing: 5, 
       },
     },
   };

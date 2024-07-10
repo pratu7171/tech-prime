@@ -1,7 +1,3 @@
-
-import React from 'react';
-
-
 const Paginations = ({ handlePrevious, handleNext, page, pageCount, setPage }) => {
     const renderPageButtons = () => {
         const buttons = [];
@@ -36,7 +32,7 @@ const Paginations = ({ handlePrevious, handleNext, page, pageCount, setPage }) =
                 <button
                     key={i}
                     onClick={() => setPage(i)}
-                    className={`px-[8px] pb-[3px]  mx-1 rounded-full border ${page === i ? 'border-aqua' : ''}`}
+                    className={`px-[8px] pb-[3px]  mx-1 rounded-full border ${page === i ? 'bg-[#0cc9eb]' : ''}`}
                 >
                     {i}
                 </button>
@@ -62,7 +58,7 @@ const Paginations = ({ handlePrevious, handleNext, page, pageCount, setPage }) =
                 <button
                     key={pageCount}
                     onClick={() => setPage(pageCount)}
-                    className={`px-[8px] pb-[3px]  mx-1 rounded-full border ${page === pageCount ? 'border-aqua' : ''}`}
+                    className={`px-[8px] pb-[3px]  mx-1 rounded-full border ${page === pageCount ? 'bg-[#0cc9eb]' : ''}`}
                 >
                     {pageCount}
                 </button>

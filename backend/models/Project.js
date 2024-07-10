@@ -30,11 +30,11 @@ const projectSchema = new mongoose.Schema({
         // required:true,
     },
     StartDate:{
-        type:String,
+        type:Date,
         // required:true,
     },
     EndDate:{
-        type:String,
+        type:Date,
         // required:true,
     },
     Location:{

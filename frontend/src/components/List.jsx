@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { GetProject, UpdateProject } from '../redux/project/project.action';
 import Paginations from './Pagination';
 import Sort from "../assets/sorting.svg";
+import moment from 'moment';
 
 const sortlist = [
   "Priority", "ProjectName", "Reason", "Type", "Divison", "Category",
@@ -109,7 +110,7 @@ const List = () => {
 
   return (
     <div className="w-full md:w-[1276px] md:h-[595px] mx-auto rounded-[10px] md:pt-0 pt-[20px]">
-      <div className="pt-[20px] flex flex-col md:bg-white bg-[#F3F5F7] rounded-[10px]" style={{ boxShadow: window.innerWidth >= 1024 ? '0 7px 18px 0 rgba(2, 118, 179, 0.13)' : 'none' }}>
+      <div className="pt-[20px] md:pt-[10px] flex flex-col md:bg-white bg-[#F3F5F7] rounded-[10px]" style={{ boxShadow: window.innerWidth >= 1024 ? '0 7px 18px 0 rgba(2, 118, 179, 0.13)' : 'none' }}>
         <div className="flex justify-between">
           <input
             type="text"
@@ -163,11 +164,14 @@ const List = () => {
             </thead>
             <tbody>
               {data.length > 0 && data.map((item) => (
-                <tr key={item._id}>
+                <tr key={item._id} className='border-b border-[#E0E0E0]'>
                   <td className="p-2 text-center">
                     <div className="flex flex-col">
                       <span className='text-left pl-[14px] text-[16px] leading-[22px] text-[#414950] font-nunito font-[800] tracking-wider'>{item.ProjectName}</span>
-                      <span className="text-left pl-[14px] text-[14px] leading-[19px] text-[#6B6B6B] font-nunito">{item.StartDate} to {item.EndDate}</span>
+                      {/* <span className="text-left pl-[14px] text-[14px] leading-[19px] text-[#6B6B6B] font-nunito">{item.StartDate} to {item.EndDate}</span> */}
+                      <span className="text-left pl-[14px] text-[14px] leading-[19px] text-[#6B6B6B] font-nunito">
+                      {moment(item.StartDate).format('MMM-DD, YYYY')} to {moment(item.EndDate).format('MMM-DD, YYYY')}
+                      </span>
                     </div>
                   </td>
                   <td className="pl-[20px] text-left text-[14px] leading-[19px] font-nunito text-[#3f3f3f]">{item.Reason}</td>
@@ -213,7 +217,7 @@ const List = () => {
                 <div className="flex justify-between mb-[16px]">
                   <div className='flex flex-col'>
                     <span className="leading-[22px] text-[16px] font-nunito text-[#414950] tracking-wider font-[800]">{item.ProjectName}</span>
-                    <span className="text-[14px] leading-[19px] text-[#6B6B6B] font-nunito"> ({item.StartDate} to {item.EndDate})</span>
+                    <span className="text-[14px] leading-[19px] text-[#6B6B6B] font-nunito"> ({moment(item.StartDate).format('MMM-DD, YYYY')} to {moment(item.EndDate).format('MMM-DD, YYYY')})</span>
                   </div>
                   <div>
                     <span className="text-[14px] leading-[19px] text-[#00284C] font-nunito font-[600]">{item.Status}</span>
