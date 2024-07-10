@@ -7,7 +7,7 @@ const getAllProjects = async (req, res) => {
   const ITEM_PER_PAGE = 7;
   let query = {};
   if (search !== "") {
-    query.Status = { $regex: search, $options: "i" };
+    query.ProjectName = { $regex: search, $options: "i" };
   }
   try {
     const skip = (page - 1) * ITEM_PER_PAGE;
@@ -86,7 +86,7 @@ const getProjectInfo = async (req, res) => {
     const currentDate = new Date();
     const delayedRunningCount = await Project.countDocuments({
       Status: 'Running',
-      Enddate: { $lt: currentDate },
+      EndDate: { $lt: currentDate },
     });
     return res.status(200).json({
       total: totalCount,
