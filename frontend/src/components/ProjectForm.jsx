@@ -54,7 +54,7 @@ const ProjectForm = () => {
     };
 
     return (
-        <div className="w-full max-w-[1268] mx-auto mb-12 mt-[18px] md:mt-0 rounded-[10px] p-[18px] shadow-lg bg-[#ffffff]" style={{ boxShadow: '0 7px 18px 0 rgba(2,118,179,0.13)' }}>
+        <div className="w-full max-w-[1268] mx-auto md:ml-0 ml-[10px] mb-12  mt-[-50px] md:mt-0 rounded-[10px] p-[18px] pt-[22px] shadow-lg bg-[#ffffff]" style={{ boxShadow: '0 7px 18px 0 rgba(2,118,179,0.13)' }}>
             <div className="flex flex-col md:flex-row">
                 <div className="w-full md:w-3/4 mb-5">
                     <div className="mb-[44px]">
@@ -208,7 +208,7 @@ const ProjectForm = () => {
                 <div flex>
                     <button
                         onClick={handleSubmit}
-                        className="w-[153px] h-[36px] rounded-[18px] bg-[#025AAB] text-white font-nunito leading-[22px] ml-[120px]"
+                        className="w-[153px] h-[36px] rounded-[18px] bg-[#025AAB] text-white font-nunito leading-[22px] ml-[150px]"
                     >
                         Save Project
                     </button>

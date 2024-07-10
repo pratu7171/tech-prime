@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import loginbg from '../assets/Header-bg.svg';
-import Logo from '../assets/Logo.svg';
+import Card from '../components/Card';
 import { useDispatch } from 'react-redux';
 import { GetProjectInfo } from '../redux/project/project.action';
 import BarChart from '../components/Chart';
@@ -18,18 +17,10 @@ const Dashboard = () => {
 
   return (
     <div className='bg-[#f3f5f7] h-screen w-screen'>
-    <div
-      className="absolute bg-no-repeat bg-cover md:w-[1308PX] flex flex-col p-[18px] h-[55px] md:h-[150px] md:ml-[58px] w-full"
-      style={{ backgroundImage: `url(${loginbg})` }}
-    >
-      <div className="w-full md:w-[calc(100%-80px)] flex">
-        <p className="text-white text-left font-nunito text-[22px] leading-[30px] md:mt-[21px] font-[600] ml-[12px]">Dashboard</p>
-        <div className="hidden md:block m-auto">
-          <img src={Logo} alt="logo" className="mt-[9px] mb-[26px]" />
-        </div>
-      </div>
-      <div>
-        <div className="flex flex-row md:grid md:grid-cols-5 gap-5 md:mt-[0] mt-[25px] overflow-x-auto" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+    <div className="absolute md:w-[1308PX] flex flex-col h-[55px] w-full">
+      <Card title={'Dashboard'}/>
+      <div className='md:relative md:z-20 md:ml-[74px] md:mt-[100px] mt-[75px] md:mr-[20px] ml-3'>
+        <div className="flex flex-row md:grid md:grid-cols-5 md:gap-10 gap-5 md:mt-[25px] z-10 md:overflow-x-visible overflow-x-auto" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
           <style>{`
             ::-webkit-scrollbar {
               display: none;
@@ -66,3 +57,6 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
+
+

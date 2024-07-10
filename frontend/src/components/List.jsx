@@ -109,7 +109,7 @@ const List = () => {
   }, []);
 
   return (
-    <div className="w-full md:w-[1276px] md:h-[595px] mx-auto rounded-[10px] md:pt-0 pt-[20px]">
+    <div className="w-full md:w-[1276px] md:h-[555px] mx-auto rounded-[10px] md:pt-0 pt-[50px] mr-[16px]">
       <div className="pt-[20px] md:pt-[10px] flex flex-col md:bg-white bg-[#F3F5F7] rounded-[10px]" style={{ boxShadow: window.innerWidth >= 1024 ? '0 7px 18px 0 rgba(2, 118, 179, 0.13)' : 'none' }}>
         <div className="flex justify-between">
           <input
