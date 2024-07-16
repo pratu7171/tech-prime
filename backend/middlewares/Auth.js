@@ -7,7 +7,9 @@ const authenticate = (req, res, next) => {
     const token = req.headers.authorization.split(" ")[1];
 
     if (!token) {
-      return res.status(401).json({ error: "Authentication failed: Token not found" });
+      return res
+        .status(401)
+        .json({ error: "Authentication failed: Token not found" });
     }
 
     // Verify the token
@@ -15,7 +17,9 @@ const authenticate = (req, res, next) => {
     req.userId = decodedToken.userId;
     next();
   } catch (error) {
-    return res.status(401).json({ error: "Authentication failed: Invalid token" });
+    return res
+      .status(401)
+      .json({ error: "Authentication failed: Invalid token" });
   }
 };
 

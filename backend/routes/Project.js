@@ -7,7 +7,7 @@ const {
   updateProjectStatusToCancelled,
   getProjectInfo,
   getDashboardChart,
-} = require("../controllers/Project")
+} = require("../controllers/Project");
 
 const ProjectRouter = express.Router();
 

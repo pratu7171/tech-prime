@@ -7,8 +7,20 @@ const getAllProjects = async (req, res) => {
   const ITEM_PER_PAGE = 7;
   let query = {};
   if (search !== "") {
-    query.ProjectName = { $regex: search, $options: "i" };
+    query.$or = [
+      { ProjectName: { $regex: search, $options: "i" } },
+      { Status: { $regex: search, $options: "i" } },
+      { Reason: { $regex: search, $options: "i" } },
+      { Type: { $regex: search, $options: "i" } },
+      { Divison: { $regex: search, $options: "i" } },
+      { Category: { $regex: search, $options: "i" } },
+      { Priority: { $regex: search, $options: "i" } },
+      { Department: { $regex: search, $options: "i" } },
+      { Location: { $regex: search, $options: "i" } },
+
+    ];
   }
+  
   try {
     const skip = (page - 1) * ITEM_PER_PAGE;
     let count = await Project.countDocuments(query);
@@ -79,13 +91,16 @@ const updateProjectStatusToCancelled = async (req, res) => {
 const getProjectInfo = async (req, res) => {
   try {
     const totalCount = await Project.countDocuments();
-    const canceledCount = await Project.countDocuments({ Status: 'Cancelled' });
-    const runningCount = await Project.countDocuments({ Status: 'Running' });
-    const closedCount = await Project.countDocuments({ Status: 'Closed' });
-    const registeredCount = await Project.countDocuments({ Status: 'Registered' });
+    const canceledCount = await Project.countDocuments({ Status: "Cancelled" });
+    const runningCount = await Project.countDocuments({ Status: "Running" });
+    const closedCount = await Project.countDocuments({ Status: "Closed" });
+    const registeredCount = await Project.countDocuments({
+      Status: "Registered",
+    });
     const currentDate = new Date();
+    console.log(currentDate);
     const delayedRunningCount = await Project.countDocuments({
-      Status: 'Running',
+      Status: "Running",
       EndDate: { $lt: currentDate },
     });
     return res.status(200).json({
@@ -108,7 +123,9 @@ const getDashboardChart = async (req, res) => {
         $group: {
           _id: "$Department",
           registeredCount: { $sum: 1 },
-          closedCount: { $sum: { $cond: [{ $eq: ["$Status", "Closed"] }, 1, 0] } },
+          closedCount: {
+            $sum: { $cond: [{ $eq: ["$Status", "Closed"] }, 1, 0] },
+          },
         },
       },
       {
@@ -117,7 +134,9 @@ const getDashboardChart = async (req, res) => {
           department: "$_id",
           registeredCount: 1,
           closedCount: 1,
-          successPercentage: { $multiply: [{ $divide: ["$closedCount", "$registeredCount"] }, 100] },
+          successPercentage: {
+            $multiply: [{ $divide: ["$closedCount", "$registeredCount"] }, 100],
+          },
         },
       },
     ];
