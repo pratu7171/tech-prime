@@ -98,7 +98,7 @@ const getProjectInfo = async (req, res) => {
       Status: "Registered",
     });
     const currentDate = new Date();
-    console.log(currentDate);
+    // console.log(currentDate);
     const delayedRunningCount = await Project.countDocuments({
       Status: "Running",
       EndDate: { $lt: currentDate },

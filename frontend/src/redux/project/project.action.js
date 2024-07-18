@@ -96,6 +96,8 @@ export const ProjectCreateData = (formdata) => async (dispatch) => {
     const data = await response.json();
     console.log(data);
 
+    dispatch({ type: PROJECT_SUCCESS, payload: data });
+
     return data;
   } catch (e) {
     dispatch({ type: PROJECT_ERROR, payload: e.message });

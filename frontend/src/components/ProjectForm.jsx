@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ProjectCreateData } from "../redux/project/project.action";
+import { useNavigate } from "react-router-dom";
 
 const ProjectForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     StartDate: "",
     EndDate: "",
@@ -61,6 +63,7 @@ const ProjectForm = () => {
       dispatch(ProjectCreateData(formData))
         .then((res) => {
           console.log(res.message);
+          navigate("/list");
         })
         .catch((err) => {
           console.log(err);
@@ -285,4 +288,3 @@ const ProjectForm = () => {
 };
 
 export default ProjectForm;
-
