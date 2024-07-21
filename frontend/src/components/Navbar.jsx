@@ -15,12 +15,12 @@ function Navbar() {
   const dispatch = useDispatch();
 
   const handleLogout = () => {
-    dispatch(authlogout()); // Dispatch the correct action for logout
+    dispatch(authlogout());
   };
 
   return (
     <div className="fixed flex md:flex-col h-[56px] md:h-[768px] w-full md:w-[58px] gap-[50px] bottom-0 md:bottom-auto bg-[#ffffff] justify-center items-center shadow-lg left-0 z-10 md:rounded-none rounded-tl-3xl rounded-tr-3xl">
-      <div className="flex md:flex-col items-center md:mt-[40px] gap-[40px] md:gap-[0px] md:mb-[-13px] ml-[65px] md:ml-0">
+      <div className="flex md:flex-col items-center md:mt-[40px] gap-[50px] md:gap-[0px] md:mb-[-13px] ml-0">
         <a href="/" className="md:mt-[60px] md:mr-[0px] mb-4 mr-[30px]">
           <img
             src={location.pathname === "/" ? dashboardactive : dashboardicon}
@@ -49,7 +49,7 @@ function Navbar() {
       </div>
       {isAuth && (
         <div
-          className={`md:mt-[170px] md:mb-0 md:mr-0 mr-7 mb-[1565px] cursor-pointer transition-opacity duration-300`}
+          className={`md:mt-[170px] md:mb-0 md:mr-0 mr-7 cursor-pointer hidden md:block`}
           onClick={handleLogout}
         >
           <img src={logouticon} alt="Logout" />
